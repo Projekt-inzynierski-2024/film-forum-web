@@ -1,0 +1,15 @@
+<p-inputGroup>
+  <p-inputGroupAddon>
+      <i class="pi pi-user"></i>
+  </p-inputGroupAddon>
+  <input pInputText [(ngModel)]="user.email" placeholder="Email" />
+</p-inputGroup>
+
+<p-inputGroup>
+  <p-inputGroupAddon>
+      <i class="pi pi-lock"></i>
+  </p-inputGroupAddon>
+  <input pInputText type="password" [(ngModel)]="user.password" placeholder="Password" />
+</p-inputGroup>
+
+<p-button label="Log in" (click)="save()"/>
