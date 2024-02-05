@@ -5,11 +5,27 @@ import { UsersComponent } from '../users/users.component';
 import { InputGroupModule } from 'primeng/inputgroup'
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputTextModule } from 'primeng/inputtext';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CardModule } from 'primeng/card';
+import { CommonModule } from '@angular/common';
+import { MessagesModule } from 'primeng/messages';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
-  imports: [ButtonModule, InputGroupModule, InputGroupAddonModule, InputTextModule, FormsModule, HttpClientModule],
+  imports: [
+    ButtonModule,
+    InputGroupModule,
+    InputGroupAddonModule,
+    InputTextModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    CardModule,
+    CommonModule,
+    MessagesModule,
+    ToastModule,
+  ],
   declarations: [HomeComponent, UsersComponent],
   exports: [HomeComponent],
   bootstrap: [HomeComponent]

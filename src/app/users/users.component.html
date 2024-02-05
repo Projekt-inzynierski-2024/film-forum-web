@@ -1,15 +1,27 @@
-<p-inputGroup>
-  <p-inputGroupAddon>
-      <i class="pi pi-user"></i>
-  </p-inputGroupAddon>
-  <input pInputText [(ngModel)]="user.email" placeholder="Email" />
-</p-inputGroup>
+<div class="container">
+  <div class="center flex align-items-center">
+    <p-card header="Log in">
+      <p-toast></p-toast>
+      <form #form="ngForm" id="ngForm">
+        <p-inputGroup class="block">
+          <p-inputGroupAddon>
+              <i class="pi pi-user"></i>
+          </p-inputGroupAddon>
+          <input #email="ngModel" required pInputText type="email" name="email" id="email" [(ngModel)]="userLoginDto.email" placeholder="Email" />
+        </p-inputGroup>
 
-<p-inputGroup>
-  <p-inputGroupAddon>
-      <i class="pi pi-lock"></i>
-  </p-inputGroupAddon>
-  <input pInputText type="password" [(ngModel)]="user.password" placeholder="Password" />
-</p-inputGroup>
+        <p-inputGroup class="block mt-2">
+          <p-inputGroupAddon>
+              <i class="pi pi-lock"></i>
+          </p-inputGroupAddon>
+          <input #password="ngModel" pInputText required type="password" name="password" id="password" [(ngModel)]="userLoginDto.password" placeholder="Password" />
+        </p-inputGroup>
 
-<p-button label="Log in" (click)="save()"/>
+        <p-inputGroup class="block mt-3">
+          <p-button label="Log in" (click)="save()"/>
+          <p-button label="Register" class="ml-2" severity="secondary" [outlined]="true"/>
+        </p-inputGroup>
+      </form>
+    </p-card>
+  <div>
+</div>
