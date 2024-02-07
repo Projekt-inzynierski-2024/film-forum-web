@@ -11,6 +11,8 @@ import { CardModule } from 'primeng/card';
 import { CommonModule } from '@angular/common';
 import { MessagesModule } from 'primeng/messages';
 import { ToastModule } from 'primeng/toast';
+import { ToastUtils } from '../../utils/ToastUtils';
+import { LoginComponent } from '../login/login.component';
 
 @NgModule({
   imports: [
@@ -26,8 +28,15 @@ import { ToastModule } from 'primeng/toast';
     MessagesModule,
     ToastModule,
   ],
-  declarations: [HomeComponent, UsersComponent],
+  declarations: [
+    HomeComponent,
+    UsersComponent,
+    LoginComponent
+  ],
   exports: [HomeComponent],
-  bootstrap: [HomeComponent]
+  bootstrap: [HomeComponent],
+  providers: [
+    ToastUtils,
+  ],
 })
 export class HomeModule { }

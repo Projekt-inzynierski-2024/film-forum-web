@@ -1,0 +1,54 @@
+<div class="flex justify-content-center align-items-center wall">
+  <div class="flex align-items-center">
+    <p-card header="Log in">
+      <p-toast></p-toast>
+      <form [formGroup]="loginForm">
+        <p-inputGroup class="block">
+          <p-inputGroupAddon>
+              <i class="pi pi-user"></i>
+          </p-inputGroupAddon>
+          <input required pInputText type="email" name="email" formControlName="email" placeholder="Email" />
+        </p-inputGroup>
+        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="m-2 text-red-500">
+          <div class="block" *ngIf="loginForm.get('email')?.hasError('required')">
+            This field is required.
+          </div>
+          <div class="block" *ngIf="loginForm.get('email')?.hasError('email')">
+            Please enter a valid email address.
+          </div>
+        </div>
+
+        <p-inputGroup class="block mt-2">
+          <p-inputGroupAddon>
+              <i class="pi pi-lock"></i>
+          </p-inputGroupAddon>
+          <input pInputText required type="password" name="password" formControlName="password" placeholder="Password" />
+        </p-inputGroup>
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="m-2 text-red-500">
+          <div class="block" *ngIf="loginForm.get('password')?.hasError('required')">
+            This field is required.
+          </div>
+          <div class="block" *ngIf="loginForm.get('password')?.hasError('minlength')">
+            Password must be at least 5 characters long.
+          </div>
+          <div class="block" *ngIf="loginForm.get('password')?.hasError('maxlength')">
+            Password must be less than 50 characters long.
+          </div>
+          <div class="block" *ngIf="loginForm.get('password')?.hasError('hasAnyNumber')">
+            Password must have at least one number.
+          </div>
+          <div class="block" *ngIf="loginForm.get('password')?.hasError('hasAnyLowercaseLetter')">
+            Password must have at least one lowercase letter.
+          </div>
+          <div class="block" *ngIf="loginForm.get('password')?.hasError('hasAnyUppercaseLetter')">
+            Password must have at least one uppercase letter.
+          </div>
+        </div>
+        <p-inputGroup class="block mt-3">
+          <p-button label="Log in" [disabled]="!loginForm.valid" (click)="save()"/>
+          <p-button label="Register" class="ml-2" severity="secondary" [outlined]="true"/>
+        </p-inputGroup>
+      </form>
+    </p-card>
+  <div>
+</div>

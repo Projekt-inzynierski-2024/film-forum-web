@@ -8,5 +8,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MessageService } from 'primeng/api';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideClientHydration(), provideHttpClient(withFetch()), importProvidersFrom([BrowserAnimationsModule]), MessageService]
+  providers: [
+    provideRouter(routes),
+    provideClientHydration(),
+    provideHttpClient(withFetch()),
+    importProvidersFrom([BrowserAnimationsModule]),
+    MessageService,
+  ]
 };
