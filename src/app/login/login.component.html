@@ -9,44 +9,30 @@
           </p-inputGroupAddon>
           <input required pInputText type="email" name="email" formControlName="email" placeholder="Email" />
         </p-inputGroup>
-        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="m-2 text-red-500">
-          <div class="block" *ngIf="loginForm.get('email')?.hasError('required')">
-            This field is required.
-          </div>
-          <div class="block" *ngIf="loginForm.get('email')?.hasError('email')">
-            Please enter a valid email address.
-          </div>
+        <div *ngIf="loginForm.get('email')?.dirty" class="block mt-2">
+          <p-message *ngIf="loginForm.get('email')?.hasError('required')" severity="error" text="Field is required"></p-message>
+          <p-message *ngIf="loginForm.get('email')?.hasError('email')" severity="error" text="Please enter a valid email address."></p-message>
         </div>
-
         <p-inputGroup class="block mt-2">
           <p-inputGroupAddon>
               <i class="pi pi-lock"></i>
           </p-inputGroupAddon>
           <input pInputText required type="password" name="password" formControlName="password" placeholder="Password" />
         </p-inputGroup>
-        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="m-2 text-red-500">
-          <div class="block" *ngIf="loginForm.get('password')?.hasError('required')">
-            This field is required.
-          </div>
-          <div class="block" *ngIf="loginForm.get('password')?.hasError('minlength')">
-            Password must be at least 5 characters long.
-          </div>
-          <div class="block" *ngIf="loginForm.get('password')?.hasError('maxlength')">
-            Password must be less than 50 characters long.
-          </div>
-          <div class="block" *ngIf="loginForm.get('password')?.hasError('hasAnyNumber')">
-            Password must have at least one number.
-          </div>
-          <div class="block" *ngIf="loginForm.get('password')?.hasError('hasAnyLowercaseLetter')">
-            Password must have at least one lowercase letter.
-          </div>
-          <div class="block" *ngIf="loginForm.get('password')?.hasError('hasAnyUppercaseLetter')">
-            Password must have at least one uppercase letter.
-          </div>
+        <div *ngIf="loginForm.get('password')?.dirty" class="mt-2">
+          <p-message class="block mb-2" *ngIf="loginForm.get('password')?.hasError('required')" severity="error" text="This field is required."></p-message>
+          <p-message class="block mb-2" *ngIf="loginForm.get('password')?.hasError('minlength')" severity="error" text="Password must be at least 5 characters long."></p-message>
+          <p-message class="block mb-2" *ngIf="loginForm.get('password')?.hasError('maxlength')" severity="error" text="Password must be less than 50 characters long."></p-message>
+          <p-message class="block mb-2" *ngIf="loginForm.get('password')?.hasError('hasAnyNumber')" severity="error" text="Password must have at least one number."></p-message>
+          <p-message class="block mb-2" *ngIf="loginForm.get('password')?.hasError('hasAnyLowercaseLetter')" severity="error" text="Password must have at least one lowercase letter."></p-message>
+          <p-message class="block" *ngIf="loginForm.get('password')?.hasError('hasAnyUppercaseLetter')" severity="error" text="Password must have at least one uppercase letter."></p-message>
         </div>
         <p-inputGroup class="block mt-3">
-          <p-button label="Log in" [disabled]="!loginForm.valid" (click)="save()"/>
+          <p-button label="Log in" [disabled]="!loginForm.valid && !loading" (click)="save()"/>
           <p-button label="Register" class="ml-2" severity="secondary" [outlined]="true"/>
+          <div *ngIf="loading" class="loading ml-2 flex align-content-center">
+            <p-progressSpinner styleClass="w-2rem h-2rem" class="flex align-items-center justify-content-center" strokeWidth="8" animationDuration=".7s"></p-progressSpinner>
+          </div>
         </p-inputGroup>
       </form>
     </p-card>

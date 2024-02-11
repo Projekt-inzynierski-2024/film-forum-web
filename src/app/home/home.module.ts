@@ -13,6 +13,8 @@ import { MessagesModule } from 'primeng/messages';
 import { ToastModule } from 'primeng/toast';
 import { ToastUtils } from '../../utils/ToastUtils';
 import { LoginComponent } from '../login/login.component';
+import { MessageModule } from 'primeng/message';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   imports: [
@@ -27,6 +29,8 @@ import { LoginComponent } from '../login/login.component';
     CommonModule,
     MessagesModule,
     ToastModule,
+    MessageModule,
+    ProgressSpinnerModule
   ],
   declarations: [
     HomeComponent,

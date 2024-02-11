@@ -2,3 +2,6 @@
   height: 100vh;
 }
 
+::ng-deep .loading .p-progress-spinner-circle {
+  stroke: var(--primary-500) !important;
+}

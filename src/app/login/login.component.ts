@@ -1,7 +1,6 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../users/users.service';
 import { ToastUtils } from '../../utils/ToastUtils';
-import { HttpErrorResponse } from '@angular/common/http';
 import { UserLoginDto } from '../users/dto/UserDto';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { hasAnyLowercaseLetterValidator, hasAnyNumberValidator, hasAnyUppercaseLetterValidator } from '../../validators/auth.validator';
@@ -18,11 +17,9 @@ interface LoginForm {
   providers: [UsersService]
 })
 export class LoginComponent implements OnInit {
-  userLoginDto: UserLoginDto = {};
-
   loginForm: FormGroup<LoginForm> = new FormGroup<LoginForm>({
-    email: new FormControl(this.userLoginDto.email ?? "", [Validators.email, Validators.required]),
-    password: new FormControl(this.userLoginDto.password ?? "", [
+    email: new FormControl("", [Validators.email, Validators.required]),
+    password: new FormControl("", [
       Validators.required,
       Validators.minLength(5),
       Validators.maxLength(50),
@@ -32,9 +29,10 @@ export class LoginComponent implements OnInit {
     ]),
   });
 
+  loading: boolean = false;
+
   constructor(
     private userService: UsersService,
-    private ref: ChangeDetectorRef,
     private toastUtils: ToastUtils) {
   }
 
@@ -46,16 +44,20 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.ref.detach();
-    this.userService.login(this.userLoginDto).subscribe(response => {
-      if (response.status === 200) {
-        const loggedUser = response.body;
+    this.loading = true;
+
+    const { email, password } = this.loginForm.value;
+    const userLoginDto: UserLoginDto = { email: email || "", password: password || "" };
+
+    this.userService.login(userLoginDto).subscribe({
+      complete: (loggedUser?: UserLoginDto) => {
         this.toastUtils.showSuccess("Success", "You have been logged in successfully");
-        this.ref.detectChanges();
+        this.loading = false;
+      }, error: () => {
+        this.toastUtils.showError("Wrong credentials", "Wrong email or password");
+        this.loginForm.controls.password.reset();
+        this.loading = false;
       }
-    }, (_: HttpErrorResponse) => {
-      this.toastUtils.showError("Wrong credentials", "Wrong email or password");
-      this.ref.detectChanges();
     });
   }
 }
