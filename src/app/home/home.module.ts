@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HomeComponent } from './home.component';
 import { ButtonModule } from 'primeng/button'
-import { UsersComponent } from '../users/users.component';
 import { InputGroupModule } from 'primeng/inputgroup'
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputTextModule } from 'primeng/inputtext';
@@ -11,10 +9,14 @@ import { CardModule } from 'primeng/card';
 import { CommonModule } from '@angular/common';
 import { MessagesModule } from 'primeng/messages';
 import { ToastModule } from 'primeng/toast';
-import { ToastUtils } from '../../utils/ToastUtils';
-import { LoginComponent } from '../login/login.component';
 import { MessageModule } from 'primeng/message';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { CoolStorageModule } from '@angular-cool/storage';
+import { HomeComponent } from './home.component';
+import { UsersComponent } from '../users/users.component';
+import { LoginComponent } from '../login/login.component';
+import { ToastUtils } from '../../utils/ToastUtils';
+import { TopbarComponent } from '../topbar/topbar.component';
 
 @NgModule({
   imports: [
@@ -30,12 +32,14 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     MessagesModule,
     ToastModule,
     MessageModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    CoolStorageModule.forRoot(),
   ],
   declarations: [
     HomeComponent,
     UsersComponent,
-    LoginComponent
+    LoginComponent,
+    TopbarComponent
   ],
   exports: [HomeComponent],
   bootstrap: [HomeComponent],

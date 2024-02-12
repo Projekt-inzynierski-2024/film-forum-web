@@ -28,7 +28,7 @@
           <p-message class="block" *ngIf="loginForm.get('password')?.hasError('hasAnyUppercaseLetter')" severity="error" text="Password must have at least one uppercase letter."></p-message>
         </div>
         <p-inputGroup class="block mt-3">
-          <p-button label="Log in" [disabled]="!loginForm.valid && !loading" (click)="save()"/>
+          <p-button label="Log in" [disabled]="!loginForm.valid || loading" (click)="save()"/>
           <p-button label="Register" class="ml-2" severity="secondary" [outlined]="true"/>
           <div *ngIf="loading" class="loading ml-2 flex align-content-center">
             <p-progressSpinner styleClass="w-2rem h-2rem" class="flex align-items-center justify-content-center" strokeWidth="8" animationDuration=".7s"></p-progressSpinner>

@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../users/users.service';
 import { ToastUtils } from '../../utils/ToastUtils';
-import { UserLoginDto } from '../users/dto/UserDto';
+import { UserDto, UserLoginDto } from '../users/dto/UserDto';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { hasAnyLowercaseLetterValidator, hasAnyNumberValidator, hasAnyUppercaseLetterValidator } from '../../validators/auth.validator';
+import { HttpResponse } from '@angular/common/http';
+import { AuthService } from '../users/auth.service';
+import { Router } from '@angular/router';
 
 interface LoginForm {
   email: FormControl<string | null>;
@@ -14,7 +17,7 @@ interface LoginForm {
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
-  providers: [UsersService]
+  providers: [UsersService, AuthService]
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup<LoginForm> = new FormGroup<LoginForm>({
@@ -33,10 +36,17 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private userService: UsersService,
-    private toastUtils: ToastUtils) {
+    private toastUtils: ToastUtils,
+    private authService: AuthService,
+    private router: Router) {
+
+    if (this.authService.isAuth()) {
+      this.router.navigate(['users']);
+    }
   }
 
   ngOnInit(): void {
+
   }
 
   save() {
@@ -50,8 +60,12 @@ export class LoginComponent implements OnInit {
     const userLoginDto: UserLoginDto = { email: email || "", password: password || "" };
 
     this.userService.login(userLoginDto).subscribe({
-      complete: (loggedUser?: UserLoginDto) => {
-        this.toastUtils.showSuccess("Success", "You have been logged in successfully");
+      next: (response: HttpResponse<UserDto>) => {
+        if (response.status === 200) {
+          this.authService.login(response.body);
+          location.reload();
+        }
+
         this.loading = false;
       }, error: () => {
         this.toastUtils.showError("Wrong credentials", "Wrong email or password");
