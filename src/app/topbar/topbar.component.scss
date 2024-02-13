@@ -1,0 +1,32 @@
+.avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: solid 1px var(--surface-border);
+}
+
+.logo {
+  width: 3rem;
+  height: 3rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (max-width: 767px) {
+  .hidden-xs {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .visible-xs {
+    display: none !important;
+  }
+}
+
+::ng-deep .search-dialog {
+    max-height: 100%;
+}

@@ -24,3 +24,11 @@ export function hasAnyUppercaseLetterValidator(): ValidatorFn {
     return hasAnyUppercaseLetter ? null : { 'hasAnyUppercaseLetter': true };
   };
 }
+
+export function isTotpCode(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const value: string = control.value;
+    const isTotpCode = /^[0-9]{6}$/.test(value);
+    return isTotpCode ? null : { 'isTotpCode': true };
+  };
+}

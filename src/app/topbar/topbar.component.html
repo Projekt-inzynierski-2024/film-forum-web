@@ -1,1 +1,37 @@
-<p-button *ngIf="is_auth" label="Log out" (onClick)="logout()"></p-button>
+<div class="grid border-bottom-1 surface-border">
+  <div class="col-5 md:col-4">
+    <div class="flex gap-4 justify-content-start flex-wrap">
+      <a [routerLink]="['']" class="gap-2 flex align-items-center justify-content-center">
+        <div class="logo flex align-items-center justify-content-center">
+          <span class="text-3xl pi pi-video"></span>
+        </div>
+        <span class="text-3xl hidden-xs">Film Forum</span>
+      </a>
+    </div>
+  </div>
+  <div class="col-1 md:col-4">
+    <p-inputGroup class="hidden-xs" (click)="openSearch()">
+      <input type="text" pInputText placeholder="Search" />
+      <button disabled type="button" class="p-button-secondary" pButton icon="pi pi-search"></button>
+    </p-inputGroup>
+    <div class="visible-xs m-1">
+      <p-button severity="secondary" (onClick)="openSearch()" icon="pi pi-search"></p-button>
+    </div>
+  </div>
+  <div class="col-6 md:col-4">
+    <div class="flex gap-4 justify-content-end flex-wrap">
+      <div class="gap-2 flex align-items-center justify-content-center">
+        <div class="hidden-xs avatar flex align-items-center justify-content-center">
+          <span class="pi pi-user"></span>
+        </div>
+        <span>{{ user?.username }}</span>
+      </div>
+      <div class="hidden-xs m-1">
+        <p-button class="flex align-items-center justify-content-center" size="small" *ngIf="is_auth" label="Log out" severity="danger" [rounded]="true" [outlined]="true" icon="pi pi-sign-out" (onClick)="logout()"></p-button>
+      </div>
+      <div class="visible-xs m-1">
+        <p-button class="flex align-items-center justify-content-center" size="small" *ngIf="is_auth" severity="danger" [rounded]="true" [outlined]="true" icon="pi pi-sign-out" (onClick)="logout()"></p-button>
+      </div>
+    </div>
+  </div>
+</div>

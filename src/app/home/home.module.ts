@@ -17,9 +17,14 @@ import { UsersComponent } from '../users/users.component';
 import { LoginComponent } from '../login/login.component';
 import { ToastUtils } from '../../utils/ToastUtils';
 import { TopbarComponent } from '../topbar/topbar.component';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { RouterModule } from '@angular/router';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { SearchComponent } from '../search/search.component';
 
 @NgModule({
   imports: [
+    RouterModule,
     ButtonModule,
     InputGroupModule,
     InputGroupAddonModule,
@@ -34,12 +39,15 @@ import { TopbarComponent } from '../topbar/topbar.component';
     MessageModule,
     ProgressSpinnerModule,
     CoolStorageModule.forRoot(),
+    InputSwitchModule,
+    DynamicDialogModule,
   ],
   declarations: [
     HomeComponent,
     UsersComponent,
     LoginComponent,
-    TopbarComponent
+    TopbarComponent,
+    SearchComponent,
   ],
   exports: [HomeComponent],
   bootstrap: [HomeComponent],

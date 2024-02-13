@@ -10,10 +10,12 @@ import { AuthService } from './auth.service';
 })
 export class UsersComponent implements OnInit {
 
-  constructor(private userService: UsersService,
-              private authService: AuthService) { }
+  constructor(
+    private userService: UsersService,
+    private authService: AuthService) {
+    authService.checkAuth();
+  }
 
   ngOnInit() {
-    this.authService.checkAuth();
   }
 }

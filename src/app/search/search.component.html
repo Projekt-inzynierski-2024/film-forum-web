@@ -1,0 +1,11 @@
+<div class="grid m-1">
+  <div class="col-11">
+    <p-inputGroup (click)="search()">
+      <input #searchBar type="text" pInputText placeholder="Search" />
+      <button type="button" pButton icon="pi pi-search"></button>
+    </p-inputGroup>
+  </div>
+  <div class="col-1">
+    <p-button class="flex align-items-center justify-content-center" icon="pi pi-times" severity="secondary" (onClick)="dialogRef.close()" [text]="true"></p-button>
+  </div>
+</div>

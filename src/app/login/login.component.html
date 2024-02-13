@@ -3,6 +3,7 @@
     <p-card header="Log in">
       <p-toast></p-toast>
       <form [formGroup]="loginForm">
+
         <p-inputGroup class="block">
           <p-inputGroupAddon>
               <i class="pi pi-user"></i>
@@ -13,6 +14,7 @@
           <p-message *ngIf="loginForm.get('email')?.hasError('required')" severity="error" text="Field is required"></p-message>
           <p-message *ngIf="loginForm.get('email')?.hasError('email')" severity="error" text="Please enter a valid email address."></p-message>
         </div>
+
         <p-inputGroup class="block mt-2">
           <p-inputGroupAddon>
               <i class="pi pi-lock"></i>
@@ -27,6 +29,24 @@
           <p-message class="block mb-2" *ngIf="loginForm.get('password')?.hasError('hasAnyLowercaseLetter')" severity="error" text="Password must have at least one lowercase letter."></p-message>
           <p-message class="block" *ngIf="loginForm.get('password')?.hasError('hasAnyUppercaseLetter')" severity="error" text="Password must have at least one uppercase letter."></p-message>
         </div>
+
+        <div *ngIf="needsTotpCode()">
+          <p-inputGroup class="block mt-2">
+            <p-inputGroupAddon>
+                <i class="pi pi-key"></i>
+            </p-inputGroupAddon>
+            <input pInputText (input)="onTotpCodeInput($event)" name="totpCode" formControlName="totpCode" placeholder="Code" />
+          </p-inputGroup>
+          <div *ngIf="loginForm.get('totpCode')?.dirty" class="mt-2">
+            <p-message class="block mb-2" *ngIf="loginForm.get('totpCode')?.hasError('isTotpCode')" severity="error" text="Not valid TOTP code."></p-message>
+          </div>
+        </div>
+
+        <p-inputGroup class="mt-2 flex align-items-center">
+          <p-inputSwitch (onChange)="switchTotpCode($event)" class="flex align-items-center justify-content-center" name="multifactor" formControlName="multifactor"></p-inputSwitch>
+          <span class="flex align-items-center justify-content-center ml-2" for="multifactor">Multifactor auth</span>
+        </p-inputGroup>
+
         <p-inputGroup class="block mt-3">
           <p-button label="Log in" [disabled]="!loginForm.valid || loading" (click)="save()"/>
           <p-button label="Register" class="ml-2" severity="secondary" [outlined]="true"/>

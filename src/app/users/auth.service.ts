@@ -10,7 +10,7 @@ const AUTH_KEY = "userAuth";
 })
 export class AuthService {
   constructor(private localStorage: CoolLocalStorage,
-              private router: Router) { }
+    private router: Router) { }
 
   login(user: UserDto | null) {
     if (user !== null) {
